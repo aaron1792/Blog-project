@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+    <%- include("partials/header.ejs") %>
+<body>
+    <main class="container">
+        <h2 class="mb-3 title-newpost">New Post</h2>
+        <form class="needs-validation" method="POST">
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label">Title</label>
+                <input type="text" class="form-control" id="firstName" name="title">
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label">Author</label>
+                <input type="text" class="form-control" id="firstName" name="author">
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="address2" class="form-label">Content: <span class="text-body-secondary"></span></label>
+                <textarea class="form-control" id="postContent" name="content" rows="10" cols="50" required placeholder="Write your blog post here..."></textarea>
+              </div>
+            </div>
+  
+            <hr class="my-4">
+  
+            <button onclick="" class="w-100 btn btn-primary btn-lg mb-4" type="submit" href="/post">Submit New Post</button>
+          </form>
+    </main>
+    <%- include("partials/footer.ejs") %>
+</body>
+</html>
