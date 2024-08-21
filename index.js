@@ -10,14 +10,18 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+let posts = [];
+let nextId = 1;
+
 app.get("/", (req, res)=>{
 
-    res.render("index.ejs")
+    res.render("index.ejs",{posts:posts})
 })
 
 app.get("/post", (req, res)=>{
 
-    res.render("post.ejs")
+    res.render("post.ejs", {posts:posts})
 })
 
 app.get("/newPost", (req, res)=>{
@@ -34,22 +38,47 @@ app.get("/contact", (req, res)=>{
 
     res.render("contact.ejs")
 })
-app.post("/newPost", (req,res)=>{
+app.get("/edit/:id", (req, res) => {
+    const post = posts.find(p => p.id === parseInt(req.params.id));
+    if (!post) {
+        return res.status(404).send('Post not found');
+    }
+    res.render("edit.ejs", { post: post });
+});
 
-    const {title, author, content} = req.body;
-function handleclick(){
+app.post('/edit/:id', (req, res) => {
+    const post = posts.find(p => p.id === parseInt(req.params.id));
+    if (!post) {
+        return res.status(404).send('Post not found');
+    }
+    post.title = req.body.title;
+    post.author = req.body.author;
+    post.content = req.body.content;
+    res.redirect('/');
+});
 
 
+app.post("/posts", (req,res)=>{
 
-}
+    const newPost = {
+        id: nextId++,
+        title: req.body.title,
+        content: req.body.content,
+        author: req.body.author,
+        date: new Date()
+    };
 
-    res.render("/post.ejs",{
-        title:title,
-        author:author,
-        content:content,
+    app.post('/delete/:id', (req, res) => {
+        posts = posts.filter(p => p.id !== parseInt(req.params.id));
+        res.redirect('/');
+    });
+    
 
-    })
+    posts.push(newPost);
+    res.redirect('/');
 })
+
+
 
 
 app.listen(port, ()=>{

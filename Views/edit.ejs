@@ -3,33 +3,32 @@
     <%- include("partials/header.ejs") %>
 <body>
     <main class="container">
-        <h2 class="mb-3 title-newpost">New Post</h2>
-        <form class="needs-validation" action="/posts" method="POST">
+        <h2 class="mb-3 title-newpost">Edit Post</h2>
+        <form class="needs-validation" action="/edit/<%= post.id %>" method="POST">
             <div class="row g-3">
               <div class="col-sm-6">
                 <label for="firstName" class="form-label">Title</label>
-                <input type="text" class="form-control" id="name" name="title">
+                <input type="text" class="form-control" id="name" name="title" value="<%= post.title %>">
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               <div class="col-sm-6">
                 <label for="firstName" class="form-label">Author</label>
-                <input type="text" class="form-control" id="author" name="author">
+                <input type="text" class="form-control" id="author" name="author" value="<%= post.author %>">
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
-              <input type="text" name="image" placeholder="Image file name (e.g., image1.jpg)" required>
               <div class="col-12">
                 <label for="address2" class="form-label">Content: <span class="text-body-secondary"></span></label>
-                <textarea class="form-control" id="postContent" name="content" rows="10" cols="50" required placeholder="Write your blog post here..."></textarea>
+                <textarea class="form-control" id="postContent" name="content" rows="10" cols="50" required placeholder="Write your blog post here..."><%= post.content %></textarea>
               </div>
             </div>
   
             <hr class="my-4">
   
-            <button id="submitBtn" class="w-100 btn btn-primary btn-lg mb-4" type="submit" value="ok">Submit New Post</button>
+            <button id="submitBtn" class="w-100 btn btn-primary btn-lg mb-4" type="submit" value="ok">Update Post</button>
           </form>
     </main>
     <%- include("partials/footer.ejs") %>
